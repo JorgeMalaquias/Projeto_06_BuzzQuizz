@@ -1,92 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>BuzzQuizz</title>
 </head>
+
 <body>
-    <div class="pagina-criacao-de-perguntas">
-        <div class="topo">
-            <h1>BuzzQuizz</h1>
-        </div>
-         <div class="conteudo">
-            <div class="display-desktop8">
-          <h2>Comece pelo começo</h2>
-           <div class="pai-input1">
-            <div>
-                <input type="text" placeholder="Título do seu quizz">
-            </div>
-            <div>
-                <input type="text" placeholder="URL da imagem do seu quizz">
-            </div>
-            <div>
-                <input type="text" placeholder="Quantidade de perguntas do quizz">
-            </div>
-            <div>
-                <input type="text" placeholder="Quantidade de níveis do quizz">
-            </div>
-         </div>
+    <div class="topo">
+        <h1>BuzzQuizz</h1>
+    </div>
+    <div class="tela-quizes-geraise-do-user"></div>
+    <div class="tela-responder-quiz"></div>
+    <div class="tela-criacao-quiz">
 
-         
-             <button>Prosseguir pra criar perguntas</button>
-            </div>
-         
-<!--talvez se pra cada tela de perguntas a gente criasse uma div?-->
-<div class="display-desktop10">
-           <h2>Crie suas perguntas</h2>
-            <div class="criar-pergunta-container">
-                <div>
-                    <main>Pergunta</main>
-                    <ion-icon name="create-outline"></ion-icon>
+        <div class="conteudo">
+            <div class="display-desktop8 hidden">
+                <h2>Comece pelo começo</h2>
+                <div class="pai-input1">
                     <div>
-                        <input type="text">
-                        <input type="text">
+                        <input type="text" placeholder="Título do seu quizz">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="URL da imagem do seu quizz">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Quantidade de perguntas do quizz">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Quantidade de níveis do quizz">
                     </div>
                 </div>
-                <div>
-                    <main>Resposta correta</main>
-                    <div>
-                        <input type="text">Texto
-                        <input type="text">Imagem
-                    </div>
-                </div>
-                <div>
-                    <main>Resposta incorreta</main>
-                    <div>
-                        <input type="text">Texto
-                        <input type="text">Imagem
-                    </div>
-                </div>
-            </div>
-        </div> 
 
-        <div class="display-desktop11">
-            <div class="criar-pergunta-sucesso">
-                  <h2>Seu quizz está pronto!</h2>
-                  <img src="Rectangle 34.png" alt="">
-                  <p>O quão Potterhead é você?</p>
-                  <div class="botao-tela-sucesso">
-                    <button>Acessar Quizz</button> 
-                 </div>
+
+                <button>Prosseguir pra criar perguntas</button>
+            </div>
+
+            <!--talvez se pra cada tela de perguntas a gente criasse uma div?-->
+            <div class="display-desktop9">
+                <h2>Crie suas perguntas</h2>
+                <div class="criar-pergunta-container">
+                    <div class="criar-pergunta">
+                        <div class="selecionar-pergunta">
+                            <h3>Pergunta</h3>
+                            <ion-icon name="create-outline"></ion-icon>
+                        </div>
+                        <div class="inputs-boxes">
+                            <input type="text" placeholder="Texto da Pergunta">
+                            <input type="text" placeholder="Cor de fundo da pergunta">
+                        </div>
+                    </div>
+                    <div class="criar-resposta-correta">
+                        <h3>Resposta correta</h3>
+                        <div class="inputs-boxes">
+                            <input type="text" placeholder="Resposta correta">
+                            <input type="text" placeholder="URL da imagem">
+                        </div>
+                    </div>
+                    <div class="criar-resposta-incorreta">
+                        <h3>Respostas incorretas</h3>
+                        <div class="inputs-boxes">
+                            <input type="text" placeholder="Resposta incorreta 1">
+                            <input type="text" placeholder="URL da imagem 1">
+                        </div>
+                        <div class="inputs-boxes">
+                            <input type="text" placeholder="Resposta incorreta 2">
+                            <input type="text" placeholder="URL da imagem 2">
+                        </div>
+                        <div class="inputs-boxes">
+                            <input type="text" placeholder="Resposta incorreta 3">
+                            <input type="text" placeholder="URL da imagem 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="display-desktop11 hidden">
+                <div class="criar-pergunta-sucesso">
+                    <h2>Seu quizz está pronto!</h2>
+                    <img src="Rectangle 34.png" alt="">
+                    <p>O quão Potterhead é você?</p>
+                    <div class="botao-tela-sucesso">
+                        <button>Acessar Quizz</button>
+                    </div>
                 </div>
                 <p class="ultima-linha-tela-sucesso">Voltar pra home</p>
             </div>
-            
+
         </div>
-        
-    
+    </div>
 
 
 
-    
-   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="scripts.js"></script>
 </body>
+
 </html>

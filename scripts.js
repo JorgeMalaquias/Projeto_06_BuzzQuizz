@@ -15,7 +15,7 @@ function criarQuizpegarListaQuizes() {
 
 function carregarQuizz(response){
   quizzes = response.data;
-  renderizarQuizzes
+
 }
 
 

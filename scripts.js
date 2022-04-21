@@ -1,11 +1,10 @@
-/*inserção de perguntas */
+/*condição de perguntas */
 
 
 
 
 
-
-
+/*condição de perguntas */
 
 
 
@@ -29,6 +28,7 @@ function criarQuiz() {
     questions: criar_quiz.questions,
     levels: criar_quiz.levels
       });
+    
     
       promise.then((response) => {
         const quizz = response.data;

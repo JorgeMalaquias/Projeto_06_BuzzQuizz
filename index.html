@@ -46,27 +46,27 @@
             </div>
 
             <!--talvez se pra cada tela de perguntas a gente criasse uma div?-->
-            <div class="display-desktop9">
+            <div class="display-desktop"><!--Perguntas-->
                 <h2>Crie suas perguntas</h2>
-                <div class="criar-pergunta-container">
-                    <div class="criar-pergunta">
-                        <div class="selecionar-pergunta">
+                <div class="criar-item-container">
+                    <div class="inputs-boxes-container">
+                        <div class="selecionar-item">
                             <h3>Pergunta</h3>
-                            <ion-icon name="create-outline"></ion-icon>
+                            <ion-icon name="create-outline" onclick="mostrarInputs()"></ion-icon>
                         </div>
-                        <div class="inputs-boxes">
+                        <div class="inputs-boxes hidden">
                             <input type="text" placeholder="Texto da Pergunta">
                             <input type="text" placeholder="Cor de fundo da pergunta">
                         </div>
                     </div>
-                    <div class="criar-resposta-correta">
+                    <div class="inputs-boxes-container hidden">
                         <h3>Resposta correta</h3>
                         <div class="inputs-boxes">
                             <input type="text" placeholder="Resposta correta">
                             <input type="text" placeholder="URL da imagem">
                         </div>
                     </div>
-                    <div class="criar-resposta-incorreta">
+                    <div class="inputs-boxes-container hidden">
                         <h3>Respostas incorretas</h3>
                         <div class="inputs-boxes">
                             <input type="text" placeholder="Resposta incorreta 1">
@@ -82,7 +82,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="enviar-infos">Prosseguir pra criar níveis</div>
             </div>
+            <div class="display-desktop hidden"> <!--Níveis-->
+                <h2>Agora, decida os níveis</h2>
+                <div class="criar-item-container">
+                    <div class="inputs-boxes-container">
+                        <div class="selecionar-item">
+                            <h3>Nível</h3>
+                            <ion-icon name="create-outline" onclick="mostrarInputs()"></ion-icon>
+                        </div>
+                        <div class="inputs-boxes">
+                            <input type="text" placeholder="Título do nível">
+                            <input type="text" placeholder="% de acerto mínima">
+                            <input type="text" placeholder="URL da imagem do nível">
+                            <input type="text" placeholder="Descrição do nível">
+                        </div>
+                    </div>
+                </div>
+                <div class="enviar-infos">Finalizar Quizz</div>
+            </div>
+            
 
             <div class="display-desktop11 hidden">
                 <div class="criar-pergunta-sucesso">

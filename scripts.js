@@ -4,55 +4,85 @@ let imagem;
 let pergunta;
 let nivel;
 
-
-let quizzes = []
-const divtodosQuizzes = document.que
+let quizzes = [];
+const divtodosQuizzes = document.querySelector(".corpo").querySelector(".todosQuizzes");
+const API = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 
 /*funções*/
 
-function criarQuizpegarListaQuizes() {
-    const promise = axios.post(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes`)
- promise.then(carregarQuizz)
+function pegarListaQuizes(){
+  const promise = axios.get(API)
+  promise.then(carregarQuizz)
 }
-
 function carregarQuizz(response){
   quizzes = response.data;
-
-/*condição de perguntas */
-
-criarQuizpegarListaQuizes()
-
-
-
-
-
-
-
-/*criando quiz*/
-
-let criar_quiz = {};
-let questions_array = [];
-let level_array = [];
-
-/*funções*/
-
-function criarQuiz() {
-    
-    const promise = axios.post(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes`, {
-    title: criar_quiz.title,
-    image: criar_quiz.image,
-    questions: criar_quiz.questions,
-    levels: criar_quiz.levels
-      });
-    
-    
-      promise.then((response) => {
-        const quizz = response.data;
-        })
-    
-    }
+  renderizarQuizzes(divtodosQuizzes)
+}
+function renderizarQuizzes(divtodosQuizzes){
+  divtodosQuizzes.innerHTML = "";
+  for (let i=0; i<quizzes.length; i++){
+      divtodosQuizzes.innerHTML +=
+      `<div class="imagensQuizzes" onclick="irParaQuizz(this)" alt="imagem do quizz">
+          <img src="${quizzes[i].image}" alt="imagem-quizz">
+          <span class="legendaQuizz">${quizzes[i].title}</span>
+      </div>`
   }
-    criarQuiz()
+}
+pegarListaQuizes();
+
+/* IR PARA CRIAR QUIZZ AO CLICAR NO BOTÃO CRIAR QUIZZ OU + */
+
+
+function criarQuizz(){
+  const botaoCriarQuizz = document.querySelector(".usuario").querySelector("button")
+
+  if (botaoCriarQuizz !== null) {
+
+      const tela1 = document.querySelector(".containerTela1")
+      const tela3 = document.querySelector("display-desktop3")
+
+      setTimeout(() => trocarDeTela(tela1,tela3) , 500);
+      
+  }
+}
+function trocarDeTela(telaA, telaB){
+  
+  telaA.classList.add("hidden");
+  telaB.classList.remove("hidden");
+}
+
+/* IR PARA O QUIZZ ESCOLHIDO */
+
+function irParaQuizz(elemento){
+  const botaoIrParaQuizz = document.querySelector(".todosQuizzes")
+
+  if(botaoIrParaQuizz !== null){
+      console.log(elemento)
+      const tela1 = document.querySelector(".containerTela1")
+      const tela2 = document.querySelector(".display-desktop8")
+      tela1.classList.add("hidden");
+      tela2.classList.remove("hidden") /* renderizarUnicoQuizz() */
+      
+      /* localizando ID pelo título do Quizz */
+      const tituloQuizz = document.querySelector(".imagensQuizzes").querySelector(".legendaQuizz").innerHTML;
+      console.log(tituloQuizz)
+     
+  }
+}    
+
+function acharQuizz(){
+  const tituloQuizz = document.querySelector(".imagensQuizzes").querySelector(".legendaQuizz").innerHTML;    
+  if (quizzes.title === "Quanto otaku você é?"){
+      return true
+  }else{
+      return false
+  }
+}
+const oQuizz = quizzes.filter(acharQuizz)
+console.log(oQuizz)
+
+
+
 
 
 

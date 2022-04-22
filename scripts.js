@@ -1,4 +1,4 @@
-/*
+
 let titulo;
 let imagem;
 let pergunta;
@@ -9,7 +9,7 @@ let quizzes = []
 const divtodosQuizzes = document.que
 
 /*funções*/
-/*
+
 function criarQuizpegarListaQuizes() {
     const promise = axios.post(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes`)
  promise.then(carregarQuizz)
@@ -19,7 +19,7 @@ function carregarQuizz(response){
   quizzes = response.data;
 
 /*condição de perguntas */
-/*
+
 criarQuizpegarListaQuizes()
 
 
@@ -29,13 +29,13 @@ criarQuizpegarListaQuizes()
 
 
 /*criando quiz*/
-/*
+
 let criar_quiz = {};
 let questions_array = [];
 let level_array = [];
 
 /*funções*/
-/*
+
 function criarQuiz() {
     
     const promise = axios.post(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes`, {
@@ -54,7 +54,7 @@ function criarQuiz() {
   }
     criarQuiz()
 
-*/
+
 
 /*inserção de perguntas no html*/
 
@@ -99,7 +99,6 @@ function inserePerguntas(numeroPerguntas) {
   }
   conteudoDaPagina.innerHTML += `<div class="enviar-infos" onclick="validarPerguntas()">Prosseguir pra criar níveis</div>`
 }
-
 let perguntaSelecionada;
 function mostrarInputs(elemento) {
   if (perguntaSelecionada !== undefined) {
@@ -118,7 +117,8 @@ function ocultarInputs() {
   perguntaSelecionada.querySelector(".inputs-boxes-container:nth-child(2)").classList.add("hidden");
   perguntaSelecionada.querySelector(".inputs-boxes-container:nth-child(3)").classList.add("hidden");
 }
-insereNiveis(3);
+
+
 
 /*inserção de niveis no html*/
 function insereNiveis(numeroNiveis) {
@@ -144,7 +144,6 @@ function insereNiveis(numeroNiveis) {
   conteudoDaPagina.innerHTML += `<div class="enviar-infos" onclick="validarNiveis()">Finalizar Quizz</div>`
 }
 let nivelSelecionado;
-
 function mostrarInputsNiveis(elemento) {
   if (nivelSelecionado !== undefined) {
     ocultarInputsNiveis();

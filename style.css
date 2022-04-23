@@ -21,6 +21,8 @@ body {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     height: 69px;
     width: 100%;
+    position: fixed;
+    z-index: 1;
 }
 
 .topo h1 {
@@ -28,6 +30,7 @@ body {
     font-size: 37px;
     line-height: 43px;
     color: #FFFFFF;
+   
 }
 
 .tela1{
@@ -88,6 +91,96 @@ body {
     color: #EC362D;
 }
 
+.imagemTop{
+    position: relative;
+    background-color: #FAFAFA;
+}
+
+.tituloQuizz{
+    position:absolute;
+    top: 25%;
+    left: 540px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 39px;
+    line-height: 46px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.perguntas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 759px;
+    box-sizing: border-box;
+    margin-top: 42px;
+    padding-left: 36.43px;
+    padding-right: 36.43px;
+    padding-top: 27.92px ;
+    padding-bottom: 17.05px;
+    background-color: #FFFFFF
+}
+
+.pergunta{
+    width: 687.5px;
+    height: 137.99px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    margin-bottom: 18.61px;
+}
+
+.opcoes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.opcao span{
+    box-sizing: border-box;
+    margin-top: 7.75px;
+    margin-bottom: 18.61px;
+}
+
+.imagemTop img{
+    width: 100%; /*o certo era coloca 100% aqui*/
+    height: 227px;
+    object-fit: cover;
+}
+
+.opcoes img{
+    width: 329.91px;
+    height: 175.2px;
+}
+
+.opcao span{
+    box-sizing: border-box;
+    margin-top: 7.75px;
+    margin-bottom: 18.61px;
+}
+
+.corpo2{
+    background-color: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
 header{
     display: flex;
     justify-content: center;
@@ -126,7 +219,7 @@ header{
     -webkit-mask-image: linear-gradient(to top, transparent 25%, black 100%);
 }
 
-.legendaQuizz{
+.legendaQuizz {
     position: absolute;
     bottom: 12px;
     left: 12px;

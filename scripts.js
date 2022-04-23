@@ -8,6 +8,7 @@ let quizzes = [];
 const divtodosQuizzes = document.querySelector(".corpo").querySelector(".todosQuizzes");
 const API = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 
+/*
 /*funções*/
 
 function pegarListaQuizes(){
@@ -28,7 +29,7 @@ function renderizarQuizzes(divtodosQuizzes){
       </div>`
   }
 }
-pegarListaQuizes();
+/*pegarListaQuizes();*/
 
 /* IR PARA CRIAR QUIZZ AO CLICAR NO BOTÃO CRIAR QUIZZ OU + */
 
@@ -78,8 +79,61 @@ function acharQuizz(){
       return false
   }
 }
-const oQuizz = quizzes.filter(acharQuizz)
-console.log(oQuizz)
+/*const oQuizz = quizzes.filter(acharQuizz)
+console.log(oQuizz)*/
+
+
+
+
+/*TELA 3*/
+let titulo;
+let imagemUrl;
+let qtdPerguntas;
+let qtdNiveis;
+let perguntas = [];
+let niveis = [];
+
+
+
+
+function validarInfoBasicas(){
+   titulo = document.querySelector(".pai-input1 input:nth-child(1)").value;
+   imagemUrl = document.querySelector(".pai-input1 input:nth-child(2)").value;
+   qtdPerguntas = document.querySelector(".pai-input1 input:nth-child(3)").value;
+   qtdNiveis = document.querySelector(".pai-input1 input:nth-child(4)").value;
+   if((validarTitulo(titulo)===false) || (validarQtdPerguntas(qtdPerguntas)===false || (validarQtdNiveis(qtdNiveis)===false))){
+    alert("Dados inseridos incorretamente. Tente novamente.");
+   }
+   else{
+    inserePerguntas(qtdPerguntas);
+    insereNiveis(qtdNiveis);
+    const telaUm = document.querySelector(".forms-info-basicas");
+    const telaDois = document.querySelector(".forms-de-perguntas");
+    trocarDeTela(telaUm, telaDois);
+   }
+}
+
+function validarTitulo(array){
+  if(array<20 || array>65){
+    return false;
+  }
+  return true;
+}
+function validarImagem(){//não sei ainda como validar se é imagem
+  return true;
+}
+function validarQtdPerguntas(perguntas){
+  if(perguntas<3){
+    return false;
+  }
+  return true;
+}
+function validarQtdNiveis(niveis){
+  if(niveis<2){
+    return false;
+  }
+  return true;
+}
 
 
 
@@ -87,7 +141,6 @@ console.log(oQuizz)
 
 
 /*inserção de perguntas no html*/
-
 function inserePerguntas(numeroPerguntas) {
   const conteudoDaPagina = document.querySelector(".forms-de-perguntas");
   for (let i = 0; i < numeroPerguntas; i++) {
@@ -147,6 +200,39 @@ function ocultarInputs() {
   perguntaSelecionada.querySelector(".inputs-boxes-container:nth-child(2)").classList.add("hidden");
   perguntaSelecionada.querySelector(".inputs-boxes-container:nth-child(3)").classList.add("hidden");
 }
+
+
+function validarPergunta(){
+  const conteudoAValidar = document.querySelector(".forms-de-perguntas");
+  const pergunta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(1)").value;
+  const corDeFundo = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(2)").value;
+  const respostaCerta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(1)").value;
+  const respostaCertaImagem = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(2)").value;
+  const respostaErrada1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(1)").value;
+  const respostaErradaImagem1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(2)").value;
+  const respostaErrada2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(3)").value;
+  const respostaErradaImagem2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(4)").value;
+  const respostaErrada3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(5)").value;
+  const respostaErradaImagem3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(6)").value;
+} //trabalhando nisso
+
+function validarTextoPergunta(array){
+  if(array>20){
+    return false;
+  }
+  return true;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

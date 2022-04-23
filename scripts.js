@@ -1,8 +1,5 @@
 
-let titulo;
-let imagem;
-let pergunta;
-let nivel;
+
 
 let quizzes = [];
 const divtodosQuizzes = document.querySelector(".corpo").querySelector(".todosQuizzes");

@@ -83,6 +83,8 @@ console.log(oQuizz)*/
 
 
 /*TELA 3*/
+
+
 let titulo;
 let imagemUrl;
 let qtdPerguntas;
@@ -91,14 +93,14 @@ let perguntas = [];
 let niveis = [];
 
 
-
+/*validacao das info basicas*/
 
 function validarInfoBasicas(){
    titulo = document.querySelector(".pai-input1 input:nth-child(1)").value;
    imagemUrl = document.querySelector(".pai-input1 input:nth-child(2)").value;
    qtdPerguntas = document.querySelector(".pai-input1 input:nth-child(3)").value;
    qtdNiveis = document.querySelector(".pai-input1 input:nth-child(4)").value;
-   if((validarTitulo(titulo)===false) || (validarQtdPerguntas(qtdPerguntas)===false || (validarQtdNiveis(qtdNiveis)===false))){
+   if((validarTitulo(titulo)===false) || (validarQtdPerguntas(qtdPerguntas)===false) || (validarQtdNiveis(qtdNiveis)===false) || (validarImagem(imagemUrl)===false)){
     alert("Dados inseridos incorretamente. Tente novamente.");
    }
    else{
@@ -111,12 +113,15 @@ function validarInfoBasicas(){
 }
 
 function validarTitulo(array){
-  if(array<20 || array>65){
+  if(array.length<20 || array.length>65){
     return false;
   }
   return true;
 }
-function validarImagem(){//não sei ainda como validar se é imagem
+function validarImagem(array){
+  if(array.includes("https")===false && array.includes("data:image")===false){
+    return false;
+  }
   return true;
 }
 function validarQtdPerguntas(perguntas){
@@ -199,31 +204,62 @@ function ocultarInputs() {
 }
 
 
-function validarPergunta(){
-  const conteudoAValidar = document.querySelector(".forms-de-perguntas");
+function validarPerguntas(){
+  console.log("Executando");
+  let respostasErradas = 0;
+  const conteudoAValidar = document.querySelector(".forms-de-perguntas .criar-item-container:nth-child(2)");
   const pergunta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(1)").value;
   const corDeFundo = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(2)").value;
   const respostaCerta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(1)").value;
   const respostaCertaImagem = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(2)").value;
-  const respostaErrada1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(1)").value;
-  const respostaErradaImagem1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(2)").value;
-  const respostaErrada2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(3)").value;
-  const respostaErradaImagem2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(4)").value;
-  const respostaErrada3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(5)").value;
-  const respostaErradaImagem3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) input:nth-child(6)").value;
-} //trabalhando nisso
+  const respostaErrada1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(2) input:nth-child(1)").value;
+  const respostaErradaImagem1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(2) input:nth-child(2)").value;
+  const respostaErrada2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(3) input:nth-child(1)").value;
+  const respostaErradaImagem2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(3) input:nth-child(2)").value;
+  const respostaErrada3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(1)").value;
+  const respostaErradaImagem3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(2)").value;
+  if((validarTextoPergunta(pergunta)===false) || (validarCorDeFundo(corDeFundo)===false) ||(validarResposta(respostaCerta)===false) || (validarImagem(respostaCertaImagem)===false) || (validarResposta(respostaErrada1)===false) || (validarImagem(respostaErradaImagem1)===false)){
+    alert("Dados inseridos incorretamente. Tente novamente.");
+  }else{
+    if(((validarResposta(respostaErrada2)===false) && (validarImagem(respostaErradaImagem2)===true)) || ((validarResposta(respostaErrada3)===false) && (validarImagem(respostaErradaImagem3)===true)) || ((validarImagem(respostaErradaImagem2)===false)&&(imagemVazia(respostaErradaImagem2)===false)) || ((validarImagem(respostaErradaImagem3)===false)&&(imagemVazia(respostaErradaImagem3)===false)) || ((validarResposta(respostaErrada2)===true) && (validarImagem(respostaErradaImagem2)===false)) || ((validarResposta(respostaErrada3)===true) && (validarImagem(respostaErradaImagem3)===false))){
+      alert("Dados inseridos incorretamente. Tente novamente.2");
+    }
+  }
+}
 
 function validarTextoPergunta(array){
-  if(array>20){
+  if(array.length<20){
     return false;
   }
   return true;
 }
+function validarCorDeFundo(array){
+  if(array.length<7){
+    return false;
+  }
+  if(array.charCodeAt(0)!==35){
+    return false;
+  }
+  for(let i=1;i<array.length;i++){
+    if(!((array.charCodeAt(i)>47 && array.charCodeAt(i)<58) || (array.charCodeAt(i)>64 && array.charCodeAt(i)<91) || (array.charCodeAt(i)>96 && array.charCodeAt(i)<123))){
+      return false;
+    }
+  }
+  return true;
+}
 
-
-
-
-
+function validarResposta(array){
+  if(array===""){
+    return false;
+  }
+  return true;
+}
+function imagemVazia(array){
+  if(array===""){
+    return true;
+  }
+  return false;
+}
 
 
 

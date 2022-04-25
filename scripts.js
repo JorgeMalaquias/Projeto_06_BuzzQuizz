@@ -8,18 +8,18 @@ const API = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 /*
 /*funções*/
 
-function pegarListaQuizes(){
+function pegarListaQuizes() {
   const promise = axios.get(API)
   promise.then(carregarQuizz)
 }
-function carregarQuizz(response){
+function carregarQuizz(response) {
   quizzes = response.data;
   renderizarQuizzes(divtodosQuizzes)
 }
-function renderizarQuizzes(divtodosQuizzes){
+function renderizarQuizzes(divtodosQuizzes) {
   divtodosQuizzes.innerHTML = "";
-  for (let i=0; i<quizzes.length; i++){
-      divtodosQuizzes.innerHTML +=
+  for (let i = 0; i < quizzes.length; i++) {
+    divtodosQuizzes.innerHTML +=
       `<div class="imagensQuizzes" onclick="irParaQuizz(this)" alt="imagem do quizz">
           <img src="${quizzes[i].image}" alt="imagem-quizz">
           <span class="legendaQuizz">${quizzes[i].title}</span>
@@ -31,49 +31,49 @@ function renderizarQuizzes(divtodosQuizzes){
 /* IR PARA CRIAR QUIZZ AO CLICAR NO BOTÃO CRIAR QUIZZ OU + */
 
 
-function criarQuizz(){
+function criarQuizz() {
   const botaoCriarQuizz = document.querySelector(".usuario").querySelector("button")
 
   if (botaoCriarQuizz !== null) {
 
-      const tela1 = document.querySelector(".containerTela1")
-      const tela3 = document.querySelector("display-desktop3")
+    const tela1 = document.querySelector(".containerTela1")
+    const tela3 = document.querySelector("display-desktop3")
 
-      setTimeout(() => trocarDeTela(tela1,tela3) , 500);
-      
+    setTimeout(() => trocarDeTela(tela1, tela3), 500);
+
   }
 }
-function trocarDeTela(telaA, telaB){
-  
+function trocarDeTela(telaA, telaB) {
+
   telaA.classList.add("hidden");
   telaB.classList.remove("hidden");
 }
 
 /* IR PARA O QUIZZ ESCOLHIDO */
 
-function irParaQuizz(elemento){
+function irParaQuizz(elemento) {
   const botaoIrParaQuizz = document.querySelector(".todosQuizzes")
 
-  if(botaoIrParaQuizz !== null){
-      console.log(elemento)
-      const tela1 = document.querySelector(".containerTela1")
-      const tela2 = document.querySelector(".display-desktop8")
-      tela1.classList.add("hidden");
-      tela2.classList.remove("hidden") /* renderizarUnicoQuizz() */
-      
-      /* localizando ID pelo título do Quizz */
-      const tituloQuizz = document.querySelector(".imagensQuizzes").querySelector(".legendaQuizz").innerHTML;
-      console.log(tituloQuizz)
-     
-  }
-}    
+  if (botaoIrParaQuizz !== null) {
+    console.log(elemento)
+    const tela1 = document.querySelector(".containerTela1")
+    const tela2 = document.querySelector(".display-desktop8")
+    tela1.classList.add("hidden");
+    tela2.classList.remove("hidden") /* renderizarUnicoQuizz() */
 
-function acharQuizz(){
-  const tituloQuizz = document.querySelector(".imagensQuizzes").querySelector(".legendaQuizz").innerHTML;    
-  if (quizzes.title === "Quanto otaku você é?"){
-      return true
-  }else{
-      return false
+    /* localizando ID pelo título do Quizz */
+    const tituloQuizz = document.querySelector(".imagensQuizzes").querySelector(".legendaQuizz").innerHTML;
+    console.log(tituloQuizz)
+
+  }
+}
+
+function acharQuizz() {
+  const tituloQuizz = document.querySelector(".imagensQuizzes").querySelector(".legendaQuizz").innerHTML;
+  if (quizzes.title === "Quanto otaku você é?") {
+    return true
+  } else {
+    return false
   }
 }
 /*const oQuizz = quizzes.filter(acharQuizz)
@@ -89,49 +89,68 @@ let titulo;
 let imagemUrl;
 let qtdPerguntas;
 let qtdNiveis;
-let perguntas = [];
-let niveis = [];
+
+let quizCriado = {
+  title: "",
+  image: "",
+  questions: [],
+  levels: [
+    {
+      title: "Título do nível 1",
+      image: "https://http.cat/411.jpg",
+      text: "Descrição do nível 1",
+      minValue: 0
+    },
+    {
+      title: "Título do nível 2",
+      image: "https://http.cat/412.jpg",
+      text: "Descrição do nível 2",
+      minValue: 50
+    }
+  ]
+}
+
 
 
 /*validacao das info basicas*/
 
-function validarInfoBasicas(){
-   titulo = document.querySelector(".pai-input1 input:nth-child(1)").value;
-   imagemUrl = document.querySelector(".pai-input1 input:nth-child(2)").value;
-   qtdPerguntas = document.querySelector(".pai-input1 input:nth-child(3)").value;
-   qtdNiveis = document.querySelector(".pai-input1 input:nth-child(4)").value;
-   if((validarTitulo(titulo)===false) || (validarQtdPerguntas(qtdPerguntas)===false) || (validarQtdNiveis(qtdNiveis)===false) || (validarImagem(imagemUrl)===false)){
+function validarInfoBasicas() {
+  titulo = document.querySelector(".pai-input1 input:nth-child(1)").value;
+  imagemUrl = document.querySelector(".pai-input1 input:nth-child(2)").value;
+  qtdPerguntas = document.querySelector(".pai-input1 input:nth-child(3)").value;
+  qtdNiveis = document.querySelector(".pai-input1 input:nth-child(4)").value;
+  if ((validarTitulo(titulo) === false) || (validarQtdPerguntas(qtdPerguntas) === false) || (validarQtdNiveis(qtdNiveis) === false) || (validarImagem(imagemUrl) === false)) {
     alert("Dados inseridos incorretamente. Tente novamente.");
-   }
-   else{
+  }
+  else {
     inserePerguntas(qtdPerguntas);
     insereNiveis(qtdNiveis);
     const telaUm = document.querySelector(".forms-info-basicas");
     const telaDois = document.querySelector(".forms-de-perguntas");
     trocarDeTela(telaUm, telaDois);
-   }
+  }
 }
 
-function validarTitulo(array){
-  if(array.length<20 || array.length>65){
+function validarTitulo(array) {
+  if (array.length < 20 || array.length > 65) {
     return false;
   }
   return true;
 }
-function validarImagem(array){
-  if(array.includes("https")===false && array.includes("data:image")===false){
+function validarImagem(array) {
+  if (array.includes("https") === false && array.includes("data:image") === false) {
     return false;
   }
   return true;
 }
-function validarQtdPerguntas(perguntas){
-  if(perguntas<3){
+function validarQtdPerguntas(perguntas) {
+  if (perguntas < 3) {
     return false;
   }
   return true;
 }
-function validarQtdNiveis(niveis){
-  if(niveis<2){
+function validarQtdNiveis(niveis) {
+  if (niveis < 2) {
     return false;
   }
   return true;
@@ -204,58 +223,64 @@ function ocultarInputs() {
 }
 
 
-function validarPerguntas(){
+function validarPerguntas() {
   console.log("Executando");
-  let respostasErradas = 0;
-  const conteudoAValidar = document.querySelector(".forms-de-perguntas .criar-item-container:nth-child(2)");
-  const pergunta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(1)").value;
-  const corDeFundo = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(2)").value;
-  const respostaCerta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(1)").value;
-  const respostaCertaImagem = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(2)").value;
-  const respostaErrada1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(2) input:nth-child(1)").value;
-  const respostaErradaImagem1 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(2) input:nth-child(2)").value;
-  const respostaErrada2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(3) input:nth-child(1)").value;
-  const respostaErradaImagem2 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(3) input:nth-child(2)").value;
-  const respostaErrada3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(1)").value;
-  const respostaErradaImagem3 = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(2)").value;
-  if((validarTextoPergunta(pergunta)===false) || (validarCorDeFundo(corDeFundo)===false) ||(validarResposta(respostaCerta)===false) || (validarImagem(respostaCertaImagem)===false) || (validarResposta(respostaErrada1)===false) || (validarImagem(respostaErradaImagem1)===false)){
-    alert("Dados inseridos incorretamente. Tente novamente.");
-  }else{
-    if(((validarResposta(respostaErrada2)===false) && (validarImagem(respostaErradaImagem2)===true)) || ((validarResposta(respostaErrada3)===false) && (validarImagem(respostaErradaImagem3)===true)) || ((validarImagem(respostaErradaImagem2)===false)&&(imagemVazia(respostaErradaImagem2)===false)) || ((validarImagem(respostaErradaImagem3)===false)&&(imagemVazia(respostaErradaImagem3)===false)) || ((validarResposta(respostaErrada2)===true) && (validarImagem(respostaErradaImagem2)===false)) || ((validarResposta(respostaErrada3)===true) && (validarImagem(respostaErradaImagem3)===false))){
-      alert("Dados inseridos incorretamente. Tente novamente.2");
+  for (let i = 0; i < qtdPerguntas; i++) {
+    const conteudoAValidar = document.querySelector(`.forms-de-perguntas .criar-item-container:nth-child(${i + 2})`);
+    let pergunta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(1)").value;
+    let corDeFundo = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(2)").value;
+    let respostaCerta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(1)").value;
+    let respostaCertaImagem = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(2) input:nth-child(2)").value;
+    let respostasErradas = ["", "", ""];
+    let respostasErradasImagem = ["", "", ""];
+    respostasErradas[0] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(2) input:nth-child(1)").value;
+    respostasErradasImagem[0] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(2) input:nth-child(2)").value;
+    respostasErradas[1] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(3) input:nth-child(1)").value;
+    respostasErradasImagem[1] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(3) input:nth-child(2)").value;
+    respostasErradas[2] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(1)").value;
+    respostasErradasImagem[2] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(2)").value;
+    if ((validarTextoPergunta(pergunta) === false) || (validarCorDeFundo(corDeFundo) === false) || (validarResposta(respostaCerta) === false) || (validarImagem(respostaCertaImagem) === false) || (validarResposta(respostasErradas[0]) === false) || (validarImagem(respostasErradasImagem[0]) === false)) {
+      alert("Dados inseridos incorretamente. Tente novamente.");
+    } else {
+      if (((validarResposta(respostasErradas[1]) === false) && (validarImagem(respostasErradasImagem[1]) === true)) || ((validarResposta(respostasErradas[2]) === false) && (validarImagem(respostasErradasImagem[2]) === true)) || ((validarImagem(respostasErradasImagem[1]) === false) && (imagemVazia(respostasErradasImagem[1]) === false)) || ((validarImagem(respostasErradasImagem[2]) === false) && (imagemVazia(respostasErradasImagem[2]) === false)) || ((validarResposta(respostasErradas[1]) === true) && (validarImagem(respostasErradasImagem[1]) === false)) || ((validarResposta(respostasErradas[2]) === true) && (validarImagem(respostasErradasImagem[2]) === false))) {
+        alert("Dados inseridos incorretamente. Tente novamente.");
+      } else {
+        preecherPerguntasNoQuizCriado(pergunta, corDeFundo, respostaCerta, respostaCertaImagem, respostasErradas, respostasErradasImagem);
+      }
     }
   }
+
 }
 
-function validarTextoPergunta(array){
-  if(array.length<20){
+function validarTextoPergunta(array) {
+  if (array.length < 20) {
     return false;
   }
   return true;
 }
-function validarCorDeFundo(array){
-  if(array.length<7){
+function validarCorDeFundo(array) {
+  if (array.length < 7) {
     return false;
   }
-  if(array.charCodeAt(0)!==35){
+  if (array.charCodeAt(0) !== 35) {
     return false;
   }
-  for(let i=1;i<array.length;i++){
-    if(!((array.charCodeAt(i)>47 && array.charCodeAt(i)<58) || (array.charCodeAt(i)>64 && array.charCodeAt(i)<91) || (array.charCodeAt(i)>96 && array.charCodeAt(i)<123))){
+  for (let i = 1; i < array.length; i++) {
+    if (!((array.charCodeAt(i) > 47 && array.charCodeAt(i) < 58) || (array.charCodeAt(i) > 64 && array.charCodeAt(i) < 91) || (array.charCodeAt(i) > 96 && array.charCodeAt(i) < 123))) {
       return false;
     }
   }
   return true;
 }
 
-function validarResposta(array){
-  if(array===""){
+function validarResposta(array) {
+  if (array === "") {
     return false;
   }
   return true;
 }
-function imagemVazia(array){
-  if(array===""){
+function imagemVazia(array) {
+  if (array === "") {
     return true;
   }
   return false;
@@ -263,7 +288,38 @@ function imagemVazia(array){
 
 
 
+function preecherPerguntasNoQuizCriado(pergunta, corDeFundo, respostaCerta, respostaCertaImagem, respostasErradas, respostasErradasImagem) {
+  console.log("tamo na lida");
+  let conteudoPergunta = {
+    title: pergunta,
+    color: corDeFundo,
+    answers: []
+  }
+  let respostaCorreta = {
+    text: respostaCerta,
+    image: respostaCertaImagem,
+    isCorrectAnswer: true
+  }
+  conteudoPergunta.answers.push(respostaCorreta);
+  let j = 0;
+  while ((respostasErradas[j] !== undefined) && (respostasErradas[j] !== "") && (respostasErradasImagem[j] !== "")) {
+    let respostaIncorreta = {
+      text: respostasErradas[j],
+      image: respostasErradasImagem[j],
+      isCorrectAnswer: false
+    }
+    conteudoPergunta.answers.push(respostaIncorreta);
+    j++;
+  }
+  quizCriado.questions.push(conteudoPergunta);
+  imprimirQuiz();
+}
 
+
+
+function imprimirQuiz(){
+  console.log(quizCriado);
+}
 
 
 
@@ -302,7 +358,7 @@ function mostrarInputsNiveis(elemento) {
   let hiddenElement = elemento.parentNode.parentNode.parentNode.querySelector(".hidden");
   hiddenElement.classList.remove("hidden");
 }
-function ocultarInputsNiveis(){
+function ocultarInputsNiveis() {
   nivelSelecionado.querySelector("ion-icon").classList.remove("invisible");
   nivelSelecionado.querySelector(".inputs-boxes").classList.add("hidden");
 }

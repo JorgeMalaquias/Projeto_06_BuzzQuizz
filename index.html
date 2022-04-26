@@ -23,19 +23,7 @@
     </div>
     <div class="tela-quizes-gerais-e-do-user">
         <div class="conteudo">
-        </div>
-    </div>
-    <!--tela 1-->
-    <div class="tela-responder-quiz">
-        <div class="conteudo">
-        </div>
-    </div>
-    <!--tela 2-->
-    <div class="tela-criacao-quiz">
-        <!--tela 3-->
-        <div class="conteudo">
-
-            <div class="containerTela1  hidden">
+            <div class="containerTela1 ">
                 <div class="tela1">
                     <header>
                         <div class="usuario">
@@ -54,8 +42,11 @@
                     </main>
                 </div>
             </div>
-            <!--tela 2 ainda vou editar essa tela direito, está bem zoada ainda-->
-
+        </div>
+    </div>
+    <!--tela 1-->
+    <div class="tela-responder-quiz hidden">
+        <div class="conteudo">
             <div class="containerTela2 hidden">
                 <div class="tela2">
                     <div class="imagemTop"><img src="IMG-20180726-WA0006.jpg" alt="imagem do quizz">"</div>
@@ -130,16 +121,15 @@
 
                 </div>
             </div>
-
-
-
             <div class="display-desktop3 hidden">
                 <img src="ranking-de-poder-dos-membros-da-akatsuki_amd2.620.webp" alt="">
             </div>
-
-
-
-
+        </div>
+    </div>
+    <!--tela 2-->
+    <div class="tela-criacao-quiz">
+        <!--tela 3-->
+        <div class="conteudo hidden">
             <div class="display-desktop forms-info-basicas">
                 <h2>Comece pelo começo</h2>
                 <div class="pai-input1">
@@ -152,21 +142,14 @@
 
                 <button onclick="validarInfoBasicas()">Prosseguir pra criar perguntas</button>
             </div>
-
-            <!--talvez se pra cada tela de perguntas a gente criasse uma div?-->
-            <div class="display-desktop forms-de-perguntas hidden">
-                <!--Perguntas-->
+            <div class="display-desktop forms-de-perguntas  hidden">
                 <h2>Crie suas perguntas</h2>
             </div>
             <div class="display-desktop forms-de-niveis hidden">
                 <!--Níveis-->
-                <h2 class="hidden">Agora, decida os níveis</h2>
-
-
+                <h2>Agora, decida os níveis</h2>
             </div>
-
-
-            <div class="display-desktop11 hidden">
+            <div class="display-desktop tela-de-sucesso-criacao  hidden">
                 <div class="criar-pergunta-sucesso">
                     <h2>Seu quizz está pronto!</h2>
                     <img src="aktsuki.jpg" alt="">
@@ -175,7 +158,7 @@
                         <button onclick="" disabled>Acessar Quizz</button>
                     </div>
                 </div>
-                <p class="ultima-linha-tela-sucesso">Voltar pra home</p>
+                <p class="ultima-linha-tela-sucesso" onclick="voltarHome()">Voltar pra home</p>
             </div>
 
         </div>

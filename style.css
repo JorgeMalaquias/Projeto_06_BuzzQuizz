@@ -293,7 +293,7 @@ header{
     margin-top: 56px;
 }
 
-h2 {
+h2, .todosOsQuizzes{
     font-weight: 700;
     font-size: 23px;
     line-height: 27px;
@@ -340,14 +340,14 @@ button {
     font-size: 21px;
 }
 
-.display-desktop11 img {
+.tela-de-sucesso-criacao img {
     width: 500px;
     height: 266px;
 }
 
 .criar-pergunta-sucesso p {
     position: absolute;
-    top: 285px;
+    top: 426px;
     left: 23px;
     font-weight: 400;
     font-size: 23px;
@@ -364,7 +364,11 @@ button {
 .criar-pergunta-sucesso {
     position: relative;
 }
-
+.botao-tela-sucesso {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
 .ultima-linha-tela-sucesso {
     display: flex;
     align-items: center;
@@ -396,11 +400,7 @@ height: 250px;
 
 
 
-.botao-tela-sucesso {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-}
+
 
 @media (max-width:1100px){
     h2{

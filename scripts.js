@@ -5,9 +5,9 @@ let quizzes = [];
 const divtodosQuizzes = document.querySelector(".corpo").querySelector(".todosQuizzes");
 const API = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 
-/*
-/*funções*/
 
+/*funções*/
+/*inserção dos quizzes na tela 1, ainda precisa ser desenvolvido a inserção dos quizzes do usuário*/
 function pegarListaQuizes() {
   const promise = axios.get(API)
   promise.then(carregarQuizz)
@@ -26,22 +26,15 @@ function renderizarQuizzes(divtodosQuizzes) {
       </div>`
   }
 }
-/*pegarListaQuizes();*/
+pegarListaQuizes();
 
 /* IR PARA CRIAR QUIZZ AO CLICAR NO BOTÃO CRIAR QUIZZ OU + */
 
 
 function criarQuizz() {
-  const botaoCriarQuizz = document.querySelector(".usuario").querySelector("button")
-
-  if (botaoCriarQuizz !== null) {
-
-    const tela1 = document.querySelector(".containerTela1")
-    const tela3 = document.querySelector("display-desktop3")
-
-    setTimeout(() => trocarDeTela(tela1, tela3), 500);
-
-  }
+  const tela1 = document.querySelector(".containerTela1");
+  const tela3 = document.querySelector(".display-desktop.forms-info-basicas");
+  setTimeout(() => trocarDeTela(tela1, tela3), 500);
 }
 function trocarDeTela(telaA, telaB) {
 
@@ -87,27 +80,14 @@ console.log(oQuizz)*/
 
 let titulo;
 let imagemUrl;
-let qtdPerguntas;
-let qtdNiveis;
+let qtdPerguntas = 3;
+let qtdNiveis = 2;
 
 let quizCriado = {
   title: "",
   image: "",
   questions: [],
-  levels: [
-    {
-      title: "Título do nível 1",
-      image: "https://http.cat/411.jpg",
-      text: "Descrição do nível 1",
-      minValue: 0
-    },
-    {
-      title: "Título do nível 2",
-      image: "https://http.cat/412.jpg",
-      text: "Descrição do nível 2",
-      minValue: 50
-    }
-  ]
+  levels: []
 }
 
 
@@ -123,6 +103,8 @@ function validarInfoBasicas() {
     alert("Dados inseridos incorretamente. Tente novamente.");
   }
   else {
+    quizCriado.title = titulo;
+    quizCriado.image = imagemUrl;
     inserePerguntas(qtdPerguntas);
     insereNiveis(qtdNiveis);
     const telaUm = document.querySelector(".forms-info-basicas");
@@ -155,9 +137,6 @@ function validarQtdNiveis(niveis) {
   }
   return true;
 }
-
-
-
 
 
 
@@ -222,9 +201,10 @@ function ocultarInputs() {
   perguntaSelecionada.querySelector(".inputs-boxes-container:nth-child(3)").classList.add("hidden");
 }
 
+/*validacao das perguntas*/
 
 function validarPerguntas() {
-  console.log("Executando");
+  let dadosInvalidos = 0;
   for (let i = 0; i < qtdPerguntas; i++) {
     const conteudoAValidar = document.querySelector(`.forms-de-perguntas .criar-item-container:nth-child(${i + 2})`);
     let pergunta = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(1) input:nth-child(1)").value;
@@ -240,14 +220,25 @@ function validarPerguntas() {
     respostasErradas[2] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(1)").value;
     respostasErradasImagem[2] = conteudoAValidar.querySelector(".inputs-boxes-container:nth-child(3) .inputs-boxes:nth-child(4) input:nth-child(2)").value;
     if ((validarTextoPergunta(pergunta) === false) || (validarCorDeFundo(corDeFundo) === false) || (validarResposta(respostaCerta) === false) || (validarImagem(respostaCertaImagem) === false) || (validarResposta(respostasErradas[0]) === false) || (validarImagem(respostasErradasImagem[0]) === false)) {
-      alert("Dados inseridos incorretamente. Tente novamente.");
+      dadosInvalidos = 1;
+      
     } else {
       if (((validarResposta(respostasErradas[1]) === false) && (validarImagem(respostasErradasImagem[1]) === true)) || ((validarResposta(respostasErradas[2]) === false) && (validarImagem(respostasErradasImagem[2]) === true)) || ((validarImagem(respostasErradasImagem[1]) === false) && (imagemVazia(respostasErradasImagem[1]) === false)) || ((validarImagem(respostasErradasImagem[2]) === false) && (imagemVazia(respostasErradasImagem[2]) === false)) || ((validarResposta(respostasErradas[1]) === true) && (validarImagem(respostasErradasImagem[1]) === false)) || ((validarResposta(respostasErradas[2]) === true) && (validarImagem(respostasErradasImagem[2]) === false))) {
-        alert("Dados inseridos incorretamente. Tente novamente.");
+        dadosInvalidos = 1;
+        
       } else {
-        preecherPerguntasNoQuizCriado(pergunta, corDeFundo, respostaCerta, respostaCertaImagem, respostasErradas, respostasErradasImagem);
+        preecherPerguntaNoQuizCriado(pergunta, corDeFundo, respostaCerta, respostaCertaImagem, respostasErradas, respostasErradasImagem);
       }
     }
+
+  }
+  if (dadosInvalidos === 1) {
+    alert("Dados inseridos incorretamente. Tente novamente.");
+    quizCriado.questions = [];
+  } else {
+    let telaUm = document.querySelector(".forms-de-perguntas");
+    let telaDois = document.querySelector(".forms-de-niveis");
+    trocarDeTela(telaUm, telaDois);
   }
 
 }
@@ -286,10 +277,10 @@ function imagemVazia(array) {
   return false;
 }
 
+/*inserir perguntas na array questions do obj quizzCriado*/
 
-
-function preecherPerguntasNoQuizCriado(pergunta, corDeFundo, respostaCerta, respostaCertaImagem, respostasErradas, respostasErradasImagem) {
-  console.log("tamo na lida");
+function preecherPerguntaNoQuizCriado(pergunta, corDeFundo, respostaCerta, respostaCertaImagem, respostasErradas, respostasErradasImagem) {
+  
   let conteudoPergunta = {
     title: pergunta,
     color: corDeFundo,
@@ -312,13 +303,6 @@ function preecherPerguntasNoQuizCriado(pergunta, corDeFundo, respostaCerta, resp
     j++;
   }
   quizCriado.questions.push(conteudoPergunta);
-  imprimirQuiz();
-}
-
-
-
-function imprimirQuiz(){
-  console.log(quizCriado);
 }
 
 
@@ -327,6 +311,7 @@ function imprimirQuiz(){
 
 /*inserção de niveis no html*/
 function insereNiveis(numeroNiveis) {
+  
   const conteudoDaPagina = document.querySelector(".forms-de-niveis");
   for (let i = 0; i < numeroNiveis; i++) {
     conteudoDaPagina.innerHTML += `
@@ -361,4 +346,111 @@ function mostrarInputsNiveis(elemento) {
 function ocultarInputsNiveis() {
   nivelSelecionado.querySelector("ion-icon").classList.remove("invisible");
   nivelSelecionado.querySelector(".inputs-boxes").classList.add("hidden");
+}
+
+
+
+/*validação de niveis*/
+function validarNiveis() {
+  let dadosInvalidos = 0;
+  for (let i = 0; i < qtdNiveis; i++) {
+    const conteudoAValidar = document.querySelector(`.forms-de-niveis .criar-item-container:nth-child(${i + 2})`);
+    let tituloNivel = conteudoAValidar.querySelector(".inputs-boxes input:nth-child(1)").value;
+    let acertoMinimo = conteudoAValidar.querySelector(".inputs-boxes input:nth-child(2)").value;
+    let imagemNivel = conteudoAValidar.querySelector(".inputs-boxes input:nth-child(3)").value;
+    let descricaoNivel = conteudoAValidar.querySelector(".inputs-boxes input:nth-child(4)").value;
+    if ((validarTituloNivel(tituloNivel) === false) || (validarAcerto(acertoMinimo) === false) || (validarImagem(imagemNivel) === false) || (validarDescricao(descricaoNivel) === false)) {
+      
+      dadosInvalidos = 1;
+    } else {
+      preencherNiveisNoQuizCriado(tituloNivel, acertoMinimo, imagemNivel, descricaoNivel);
+    }
+  }
+
+
+  let temPorcentagemZero = false;
+  for (let i = 0; i < quizCriado.levels.length; i++) {
+    if (quizCriado.levels[i].minValue === "0") {
+      temPorcentagemZero = true;
+    }
+  }
+  if (temPorcentagemZero === false) {
+    dadosInvalidos = 1;
+  }
+  if (dadosInvalidos === 1) {
+    alert("Dados inseridos incorretamente. Tente novamente.");
+  } else {
+    let telaUm = document.querySelector(".forms-de-niveis");
+    let telaDois = document.querySelector(".tela-de-sucesso-criacao");
+    trocarDeTela(telaUm, telaDois);
+    enviarQuizParaApi();
+  }
+}
+
+function validarTituloNivel(array) {
+  if (array.length < 10) {
+    return false;
+  }
+  return true;
+}
+function validarDescricao(array) {
+  if (array.length < 30) {
+    return false;
+  }
+  return true;
+}
+function validarAcerto(porcentagem) {
+  if (!(porcentagem >= 0 && porcentagem <= 100)) {
+    return false;
+  }
+  return true;
+}
+function preencherNiveisNoQuizCriado(tituloNivel, acertoMinimo, imagemNivel, descricaoNivel) {
+  const nivel = {
+    title: tituloNivel,
+    image: imagemNivel,
+    text: descricaoNivel,
+    minValue: acertoMinimo
+  }
+  quizCriado.levels.push(nivel);
+}
+
+
+
+/*envio para API*/
+
+
+function enviarQuizParaApi(){
+  let promise = axios.post(API, quizCriado);
+  promise.then(imprimirQuizMandadoPraApi);
+  promise.catch(deuRuimNaApi);
+  resetarQuizCriado();
+}
+
+
+function imprimirQuizMandadoPraApi(promise) {
+  console.log('deu certo');
+  console.log(promise.data);
+}
+function deuRuimNaApi(promise) {
+  console.log('deu ruim');
+  console.log(promise.response);
+}
+
+function resetarQuizCriado(){
+  quizCriado = {
+    title: "",
+    image: "",
+    questions: [],
+    levels: []
+  }
+}
+
+function voltarHome(){
+  let telaUm = document.querySelector(".tela-de-sucesso-criacao");
+  let telaDois = document.querySelector(".forms-info-basicas");
+  trocarDeTela(telaUm, telaDois);
+  telaUm = document.querySelector(".tela-criacao-quiz");
+  telaDois = document.querySelector(".tela-quizes-gerais-e-do-user");
+  trocarDeTela(telaUm, telaDois);
 }

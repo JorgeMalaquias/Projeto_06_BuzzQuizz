@@ -32,9 +32,12 @@ pegarListaQuizes();
 
 
 function criarQuizz() {
-  const tela1 = document.querySelector(".containerTela1");
-  const tela3 = document.querySelector(".display-desktop.forms-info-basicas");
+  let tela1 = document.querySelector(".tela-quizes-gerais-e-do-user");
+  let tela3 = document.querySelector(".tela-criacao-quiz");
   setTimeout(() => trocarDeTela(tela1, tela3), 500);
+  tela1 = document.querySelector(".usuario sem-quizzes");
+  tela3 = document.querySelector(".usuario com-quizzes");
+  trocarDeTela(tela1, tela3);
 }
 function trocarDeTela(telaA, telaB) {
 
@@ -477,7 +480,7 @@ function voltarHome() {
 function acessarTelaQuiz(id) {
   document.querySelector(".tela-quizes-gerais-e-do-user").classList.add("hidden");
   document.querySelector(".tela-criacao-quiz").classList.add("hidden");
-  document.querySelector(".tela-responder-quiz").classList.add("hidden");
+  document.querySelector(".tela-responder-quiz").classList.remove("hidden");
 }
 
 

@@ -48,16 +48,8 @@ body {
 
     width: 1052px;
     height: 181px;
-
-    background: #FAFAFA;
-    border: 1px dashed #D5D5D5;
-    box-sizing: border-box;
-    border-radius: 5px;
-
-    box-sizing: border-box;
     margin-bottom: 77px;
-    margin-top: 77px;
-
+    margin-top: 120px;
 }
 
 .usuario span {
@@ -74,7 +66,42 @@ body {
 
     color: #B9B9B9;
 }
+.criar-novo-quiz{
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+.criar-novo-quiz ion-icon{
+    width: 20px;
+    height: 20px;
+    color: red;
+}
+.usuario.sem-quizzes{
+    background: #FAFAFA;
+    border: 1px dashed #D5D5D5;
+    box-sizing: border-box;
+    border-radius: 5px;
 
+    box-sizing: border-box;
+    
+}
+header{
+    height: fit-content;
+    margin-bottom: 120px;
+    margin-top: 30px;
+}
+.usuario.com-quizzes{
+    align-items: flex-start;
+    
+}
+.quizzes-ja-criados{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.quizzes-ja-criados > div{
+    margin: 10px;
+}
 .usuario button {
     background: #FAFAFA;
     border: 1px dashed #EC362D;
@@ -86,6 +113,7 @@ body {
     font-size: 21px;
     line-height: 25px;
     display: flex;
+    justify-content: center;
     align-items: center;
     text-align: center;
     color: #EC362D;
@@ -195,7 +223,9 @@ body {
     font-weight: 700;
     font-size: 20px;
 }
-
+.corpo{
+    margin-top: 20px;
+}
 .corpo2 {
     background-color: #FAFAFA;
     display: flex;

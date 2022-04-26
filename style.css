@@ -30,17 +30,17 @@ body {
     font-size: 37px;
     line-height: 43px;
     color: #FFFFFF;
-   
+
 }
 
-.tela1{
+.tela1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.usuario{
+.usuario {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -60,7 +60,7 @@ body {
 
 }
 
-.usuario span{
+.usuario span {
     display: flex;
     flex-wrap: wrap;
     font-family: 'Roboto';
@@ -75,7 +75,7 @@ body {
     color: #B9B9B9;
 }
 
-.usuario button{
+.usuario button {
     background: #FAFAFA;
     border: 1px dashed #EC362D;
     box-sizing: border-box;
@@ -91,15 +91,24 @@ body {
     color: #EC362D;
 }
 
-.imagemTop{
+.imagemTop {
     position: relative;
     background-color: #FAFAFA;
+    width: 100%;
 }
-
-.tituloQuizz{
-    position:absolute;
+.containerTela2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.opacidade{
+    background-color: #000000;
+    width: 100%;
+    height: 227px;
+}
+.tituloQuizz {
+    position: absolute;
     top: 25%;
-    left: 540px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -111,7 +120,7 @@ body {
     color: #FFFFFF;
 }
 
-.perguntas{
+.perguntas {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,12 +129,14 @@ body {
     margin-top: 42px;
     padding-left: 36.43px;
     padding-right: 36.43px;
-    padding-top: 27.92px ;
+    padding-top: 27.92px;
     padding-bottom: 17.05px;
-    background-color: #FFFFFF
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px #0000000D;
+
 }
 
-.pergunta{
+.pergunta {
     width: 687.5px;
     height: 137.99px;
     display: flex;
@@ -142,37 +153,50 @@ body {
     margin-bottom: 18.61px;
 }
 
-.opcoes{
+.opcoes {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
-
 }
 
-.opcao span{
+.opcao span {
     box-sizing: border-box;
     margin-top: 7.75px;
     margin-bottom: 18.61px;
 }
+.errada span{
+    color: #FF4B4B;
+}
+.certa span{
+    color: #009C22;
+}
+.nao-escolhidas{
+    opacity: 50%;
+}
+.opcoes>div {
+    display: flex;
+}
 
-.imagemTop img{
-    width: 100%; /*o certo era coloca 100% aqui*/
+.imagemTop img {
+    width: 100%;
     height: 227px;
     object-fit: cover;
 }
 
-.opcoes img{
+.opcoes img {
     width: 329.91px;
     height: 175.2px;
 }
 
-.opcao span{
+.opcao span {
     box-sizing: border-box;
     margin-top: 7.75px;
     margin-bottom: 18.61px;
+    font-weight: 700;
+    font-size: 20px;
 }
 
-.corpo2{
+.corpo2 {
     background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
@@ -181,13 +205,13 @@ body {
 
 }
 
-header{
+header {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.todosQuizzes{
+.todosQuizzes {
     width: 1052px;
     display: flex;
     flex-wrap: wrap;
@@ -198,7 +222,7 @@ header{
 
 }
 
-.imagensQuizzes{
+.imagensQuizzes {
     position: relative;
     box-sizing: border-box;
     margin-bottom: 12px;
@@ -206,12 +230,14 @@ header{
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 67%, #000000 100%);
     transform: scale(1);
 }
-.imagensQuizzes:hover{
+
+.imagensQuizzes:hover {
     cursor: pointer;
     transform: scale(1.07);
     transition: transform .2s;
 }
-.imagensQuizzes img{
+
+.imagensQuizzes img {
     width: 340px;
     height: 181px;
     border-radius: 5px;
@@ -239,7 +265,41 @@ header{
     align-items: center;
 }
 
-.display-desktop{
+.resultado {
+    font-family: Roboto;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #EC362D;
+    width: 90%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.descricao {
+    display: flex;
+    margin-top: 18px;
+    max-width: 90%;
+}
+
+.descricao .texto {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 310px;
+    font-family: Roboto;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.display-desktop {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -255,32 +315,36 @@ header{
     padding: 20px;
 }
 
-.inputs-boxes-container{
+.inputs-boxes-container {
     display: flex;
     flex-direction: column;
     margin-bottom: 14px;
 }
 
-.criar-item-container ion-icon{
+.criar-item-container ion-icon {
     width: 26px;
     height: 26px;
     margin-bottom: 14px;
 }
-.selecionar-item{
+
+.selecionar-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.inputs-boxes input{
+
+.inputs-boxes input {
     font-style: italic;
     margin-bottom: 14px;
 }
-.criar-item-container h3{
+
+.criar-item-container h3 {
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 14px;
 }
-.enviar-infos{
+
+.enviar-infos {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -293,7 +357,8 @@ header{
     margin-top: 56px;
 }
 
-h2, .todosOsQuizzes{
+h2,
+.todosOsQuizzes {
     font-weight: 700;
     font-size: 23px;
     line-height: 27px;
@@ -364,11 +429,13 @@ button {
 .criar-pergunta-sucesso {
     position: relative;
 }
+
 .botao-tela-sucesso {
     margin-top: 50px;
     display: flex;
     justify-content: center;
 }
+
 .ultima-linha-tela-sucesso {
     display: flex;
     align-items: center;
@@ -378,9 +445,19 @@ button {
     height: 44px;
 }
 
-.display-desktop3 img{
-    width: 1300px;
-height: 250px;
+.display-desktop3 img {
+    max-width: 750px;
+    height: 250px;
+    
+}
+.display-desktop3{
+    margin-top: 62px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px #0000000D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
 
@@ -394,7 +471,8 @@ height: 250px;
 .hidden {
     display: none;
 }
-.invisible{
+
+.invisible {
     opacity: 0;
 }
 
@@ -402,17 +480,20 @@ height: 250px;
 
 
 
-@media (max-width:1100px){
-    h2{
+@media (max-width:1100px) {
+    h2 {
         font-size: 20px;
     }
-    .criar-item-container{
+
+    .criar-item-container {
         width: 374px;
     }
-    .enviar-infos{
+
+    .enviar-infos {
         margin-top: 6px;
     }
-    .inputs-boxes input{
+
+    .inputs-boxes input {
         width: 100%;
     }
 }
